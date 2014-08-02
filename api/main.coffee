@@ -12,8 +12,12 @@ User = require './models/user'
 app = express()
 
 app.use bodyParser()
-app.use cookieParser("Put a secret here..")
-app.use session()
+app.use cookieParser()
+app.use session
+  secret: "Put a secret here.."
+  saveUninitialized: true,
+  resave: true
+
 port = 3333
 
 router = express.Router()
