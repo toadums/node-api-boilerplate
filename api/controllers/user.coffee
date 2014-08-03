@@ -6,11 +6,10 @@ class UserController extends Controller
   # POST /u
   create: (req, res) ->
 
-    User.register new User({username: req.body.username, email: req.body.email}), req.body.password, (err, user) ->
-      if err then res.send err
-
-      res.json user
-
+    user =  new User({username: req.body.username, email: req.body.email, password: req.body.password})
+    user.save (err) ->
+      if err then res.json Error: err
+      else res.json {result: "success", user: user}
   # GET /u
   show: (req, res) ->
     User.find (err, users) ->

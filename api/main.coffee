@@ -2,12 +2,7 @@ express = require 'express'
 bodyParser = require 'body-parser'
 session = require 'express-session'
 config = require "./config/index"
-
-passport = require 'passport'
-LocalStrategy = require('passport-local').Strategy
 cookieParser = require 'cookie-parser'
-
-User = require './models/user'
 
 app = express()
 
@@ -21,15 +16,10 @@ app.use session
 port = 3333
 
 router = express.Router()
+
 config.routes router
+config.passport app
 
-app.use passport.initialize()
-app.use passport.session()
-
-passport.use User.createStrategy()
-
-passport.serializeUser User.serializeUser()
-passport.deserializeUser User.deserializeUser()
 
 app.use '/api', router
 

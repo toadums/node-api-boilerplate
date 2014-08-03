@@ -20,7 +20,9 @@ module.exports = (router) ->
   ###############################
 
   router.route '/login'
-    .post passport.authenticate('local'), require('../controllers/session').create
+    .post passport.authenticate('local'), (req, res) ->
+      res.json req.user
+
 
   router.route '/logout'
     .get require('../controllers/session').delete
