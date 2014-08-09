@@ -3,6 +3,7 @@ bodyParser = require 'body-parser'
 session = require 'express-session'
 config = require "./config/index"
 cookieParser = require 'cookie-parser'
+createRoutes = require './routes'
 
 app = express()
 
@@ -15,11 +16,9 @@ app.use session
 
 port = 3333
 
-router = express.Router()
+router = createRoutes()
 
-config.routes router
 config.passport app
-
 
 app.use '/api', router
 
