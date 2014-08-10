@@ -46,7 +46,7 @@ class Router
 
   # Create a route for one of the 5 crud actions
   createRoute: (path, action, controller) ->
-    beforeFilters = require("../controllers/#{controller}").beforeFilters
+    beforeFilters = require("../controllers/#{controller}").beforeFilters || []
     actionMethod = require("../controllers/#{controller}")[action]
 
     methods = []
