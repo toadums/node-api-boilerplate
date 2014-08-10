@@ -8,6 +8,7 @@
 		"95dd20cc-2b15-2f1a-1add-85df99fc61cf",
 		"871a8f8c-5db7-6b5d-935e-068dbf842ed7",
 		"0d2c6e0a-7b76-a064-a450-9f08a7d8ad2f",
+		"7238f284-9fdc-d9fa-1a4c-4793eb0859fc",
 		"1079e36b-dd22-774a-f6b2-f8b46cfc74d4",
 		"94ea5fb0-3b35-3cc3-2b65-85367f8f2353"
 	],
@@ -50,6 +51,35 @@
 			"responses": [],
 			"tests": "",
 			"collectionId": "bcfa1fe4-8615-a9d9-af9b-b616494c0c91",
+			"synced": false
+		},
+		{
+			"id": "7238f284-9fdc-d9fa-1a4c-4793eb0859fc",
+			"headers": "",
+			"url": "http://localhost:3333/api/u/diddy",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "PUT",
+			"data": [
+				{
+					"key": "firstname",
+					"value": "Diddy",
+					"type": "text"
+				},
+				{
+					"key": "lastname",
+					"value": "Kong",
+					"type": "text"
+				}
+			],
+			"dataMode": "urlencoded",
+			"version": 2,
+			"tests": "",
+			"time": 1407713282114,
+			"name": "Update user",
+			"description": "Should succeed",
+			"collectionId": "bcfa1fe4-8615-a9d9-af9b-b616494c0c91",
+			"responses": [],
 			"synced": false
 		},
 		{
