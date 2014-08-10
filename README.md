@@ -32,3 +32,16 @@ Router.resource 'u', controller: 'users'
 # create only the actions (of the 5 above) you list
 Router.resource 'u', controller: 'users', only: [index, create] 
 ```
+
+#### Router.<verb>
+If you need more control, you can specify routes the following way:
+
+```
+# A post to /login will run the create action in the sessions controller
+Router.post 'login', controller: 'sessions', action: create
+
+# A get to /book/moby_dick will run the find method of the books controller, for id = moby_dick
+Router.get '/book/:id', controller: 'books', action: find
+```
+
+These methods are available for: `GET`, `POST`, `PUT`, and `DELETE`
