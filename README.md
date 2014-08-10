@@ -33,8 +33,8 @@ Router.resource 'u', controller: 'users'
 Router.resource 'u', controller: 'users', only: [index, create] 
 ```
 
-#### Router.<verb>
-If you need more control, you can specify routes the following way:
+#### Router.[verb]
+If you need more flexibility, you can specify routes the following way:
 
 ```
 # A post to /login will run the create action in the sessions controller
