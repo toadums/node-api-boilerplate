@@ -11,16 +11,11 @@ module.exports = () ->
 
   Router.resource 'u', controller: 'users', only: [index, create, show, update, destroy]
 
-
   # ###############################
   # ########### Session ###########
   # ###############################
-  router.route '/login'
-    .post passport.authenticate('local'), (req, res) ->
-      res.json req.user
-
-  router.route '/logout'
-    .get require('../controllers/sessions').delete
+  Router.post 'login', controller: 'sessions', action: create
+  Router.get 'logout', controller: 'sessions', action: destroy
 
   return router
 

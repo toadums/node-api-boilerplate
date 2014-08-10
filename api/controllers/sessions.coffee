@@ -1,6 +1,12 @@
-User = require '../models/user'
+Controller = require './base_controller'
 
-module.exports =
+class SessionController extends Controller
+
+  constructor: ->
+    @beforeFilters = [
+      {method: @authenticate, only: [create]}
+    ]
+
   # POST /login
   create: (req, res) ->
     console.log "Login attempt"
@@ -9,7 +15,9 @@ module.exports =
       user: req.user
 
   # GET /logout
-  delete: (req, res) ->
+  destroy: (req, res) ->
     req.logout()
     res.json
       success: true
+
+module.exports = new SessionController()

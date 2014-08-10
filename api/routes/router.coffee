@@ -22,7 +22,7 @@ _verbs =
 # Router.resource 'u', controller: 'users', only: ['create', 'show']
 
 class Router
-  resource: (path, opts, cb) ->
+  resource: (path, opts) ->
     unless controller = opts.controller
       return console.log "Must specify a controller"
 
@@ -46,23 +46,9 @@ class Router
 
   # Create a route for one of the 5 crud actions
   createRoute: (path, action, controller) ->
-    beforeFilters = require("../controllers/#{controller}").beforeFilters || []
     actionMethod = require("../controllers/#{controller}")[action]
 
-    methods = []
-    # For each before filter, if we would like to run it on the current action, add it to the array
-    for filter in beforeFilters
-      # Specifying the actions to apply filters to
-      if filter.only
-        if _.contains(filter.only, action) then methods.push filter.method
-
-      # Specifying the actions you do NOT want to apply filters to
-      else if filter.except
-        if not _.contains(filter.except, action) then methods.push filter.method
-
-      # Apply to all!
-      else
-        methods.push filter.method
+    methods = @getBeforeFilters controller, action
 
     # push the actual method
     methods.push actionMethod
@@ -79,6 +65,54 @@ class Router
         @router.route("/#{path}/:id").put methods
       when destroy
         @router.route("/#{path}/:id").delete methods
+
+  post: (path, opts) ->
+    @createCustomRoute "post", path, opts
+
+  get: (path, opts) ->
+    @createCustomRoute "get", path, opts
+
+  put: (path, opts) ->
+    @createCustomRoute "put", path, opts
+
+  delete: (path, opts) ->
+    @createCustomRoute "delete", path, opts
+
+  # Specify which verb you would like to create a route for
+  createCustomRoute: (verb, path, opts) ->
+    unless (controller = opts.controller) and (action = opts.action)
+      return console.log "Must send controller and action into #{verb}"
+
+    unless actionMethod = require("../controllers/#{controller}")[action]
+      return console.log "Method: #{action} not found in controller: #{controller}"
+
+    methods = @getBeforeFilters controller, action
+
+    methods.push actionMethod
+
+    @router.route("/#{path}")[verb] methods
+
+  # get the filters that should run before the action method
+  getBeforeFilters: (controller, action) ->
+    beforeFilters = require("../controllers/#{controller}").beforeFilters || []
+    methods = []
+
+    # For each before filter, if we would like to run it on the current action, add it to the array
+    for filter in beforeFilters
+      # Specifying the actions to apply filters to
+      if filter.only
+        if _.contains(filter.only, action) then methods.push filter.method
+
+      # Specifying the actions you do NOT want to apply filters to
+      else if filter.except
+        if not _.contains(filter.except, action) then methods.push filter.method
+
+      # Apply to all!
+      else
+        methods.push filter.method
+
+    methods
+
 
 module.exports = new Router()
 

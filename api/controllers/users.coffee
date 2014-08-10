@@ -23,9 +23,12 @@ class UserController extends Controller
 
   # GET /u/:id
   show: (req, res) =>
-    User.findById req.params.user_id, (err, user) =>
+    User.findOne username: req.params.id, (err, user) =>
       if err then res.send err
-      unless user and user?._id.equals(req.user?_.id)
+      unless user
+        res.json
+          err: "User not found with username: #{req.params.id}"
+      if not user?._id.equals(req.user?._id)
         res.json
           err: "Not Authenticated"
       else if user
@@ -34,23 +37,22 @@ class UserController extends Controller
           user: user
       else
         res.json
-          error: "Not Authenticated"
+          error: "Not Authenticated2"
 
   # PUT /u/:id
   update: (req, res) ->
-    User.findById req.params.user_id, (err, user) ->
-      if err then res.send user
+    user = req.user
 
-      user.name.first = req.body.firstname if req.body.firstname
-      user.name.last = req.body.lastname if req.body.lastname
+    user.name.first = req.body.firstname if req.body.firstname
+    user.name.last = req.body.lastname if req.body.lastname
 
-      user.save (err) ->
-        if err then res.send err
-        res.json message: "User updated: ", user
+    user.save (err) ->
+      if err then res.send err
+      res.json message: "User updated: ", user
 
   # DELETE /u/:id
   destroy: (req, res) ->
-    User.remove {_id: req.params.user_id}, (err, user) ->
+    User.remove {_id: req.params.id}, (err, user) ->
       if err then res.send err
       res.json {message: "Sucessfully deleted"}
 
