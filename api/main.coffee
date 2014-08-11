@@ -1,3 +1,5 @@
+global.logger = require("../utils/logger")
+
 express = require 'express'
 bodyParser = require 'body-parser'
 session = require 'express-session'
@@ -23,4 +25,4 @@ config.passport app
 app.use '/api', router
 
 app.listen port
-console.log "Let's make it rain on: #{port}"
+logger.info "Let's make it rain on: #{port}"

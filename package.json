@@ -5,7 +5,8 @@
   "version": "0.0.1",
   "private": false,
   "scripts": {
-    "start": "./go.sh"
+    "start": "./go.sh",
+    "test": "mocha --compilers coffee:coffee-script/register"
   },
   "dependencies": {
     "bcrypt": "^0.7.8",
@@ -17,6 +18,8 @@
     "passport": "^0.2.0",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^0.3.0",
-    "underscore": "^1.6.0"
+    "request": "^2.40.0",
+    "underscore": "^1.6.0",
+    "winston": "^0.7.3"
   }
 }

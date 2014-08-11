@@ -24,12 +24,12 @@ _verbs =
 class Router
   resource: (path, opts) ->
     unless controller = opts.controller
-      return console.log "Must specify a controller"
+      return logger.error "Must specify a controller"
 
     # If the user passes in actions, make sure they are correct
     if actions = opts.only
       if (badActions = @checkActions actions).length
-        return console.log "Bad actions specified for path /#{path}: #{a for a in badActions}"
+        return logger.error "Bad actions specified for path /#{path}: #{a for a in badActions}"
     else
       actions = _actions
 
@@ -81,10 +81,10 @@ class Router
   # Specify which verb you would like to create a route for
   createCustomRoute: (verb, path, opts) ->
     unless (controller = opts.controller) and (action = opts.action)
-      return console.log "Must send controller and action into #{verb}"
+      return logger.error "Must send controller and action into #{verb}"
 
     unless actionMethod = require("../controllers/#{controller}")[action]
-      return console.log "Method: #{action} not found in controller: #{controller}"
+      return logger.error "Method: #{action} not found in controller: #{controller}"
 
     methods = @getBeforeFilters controller, action
 

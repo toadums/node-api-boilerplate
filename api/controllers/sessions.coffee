@@ -9,10 +9,11 @@ class SessionController extends Controller
 
   # POST /login
   create: (req, res) ->
-    console.log "Login attempt"
-    res.json
-      success: true
-      user: req.user
+    if req.user
+      res.json
+        user: req.user
+    else res.json
+      error: "Could not find user"
 
   # GET /logout
   destroy: (req, res) ->

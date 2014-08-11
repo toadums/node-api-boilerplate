@@ -8,7 +8,7 @@ Install:
  * Nodemon: `npm install -g nodemon`
  * Coffeescript: `npm install -g coffee-script`
  * Mocha: `npm install -g mocha`
- 
+
 ## Run
 `./go.sh`
 
@@ -24,14 +24,14 @@ Use this if you just want to implement some, or all of:
 |POST   |/users   |users#create  |create a new user   	      |
 |GET   	|/users   |users#show    |display a specific user   	|
 |PUT    |/users   |users#update  |update a specific user      |
-|DELETE |/users   |users#destroy |delete a specific user   	  | 
+|DELETE |/users   |users#destroy |delete a specific user   	  |
 
 ```
 # create all 5 routes
-Router.resource 'u', controller: 'users' 
+Router.resource 'u', controller: 'users'
 
 # create only the actions (of the 5 above) you list
-Router.resource 'u', controller: 'users', only: [index, create] 
+Router.resource 'u', controller: 'users', only: [index, create]
 ```
 
 #### Router.[verb]
