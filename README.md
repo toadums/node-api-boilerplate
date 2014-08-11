@@ -12,7 +12,7 @@ Install:
 `./go.sh`
 
 ## Routing
-There are 5 methods for routing.
+There are 5 methods for routing. You will want to put them in `api/routes/index.coffee`
 
 #### Router.resource
 Use this if you just want to implement some, or all of:
