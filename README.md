@@ -7,7 +7,8 @@ Install:
  * [MongoDB](http://docs.mongodb.org/manual/tutorial/install-mongodb-on-os-x/)
  * Nodemon: `npm install -g nodemon`
  * Coffeescript: `npm install -g coffee-script`
-
+ * Mocha: `npm install -g mocha`
+ 
 ## Run
 `./go.sh`
 
