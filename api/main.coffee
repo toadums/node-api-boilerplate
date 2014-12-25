@@ -3,9 +3,11 @@ global.logger = require("../utils/logger")
 express = require 'express'
 bodyParser = require 'body-parser'
 session = require 'express-session'
-config = require "./config/index"
 cookieParser = require 'cookie-parser'
 createRoutes = require './routes'
+passport = require './passport'
+config = require 'config'
+mongoose   = require 'mongoose'
 
 app = express()
 
@@ -20,7 +22,8 @@ port = 3333
 
 router = createRoutes()
 
-config.passport app
+mongoose.connect config.get('server.db')
+passport app
 
 app.use '/api', router
 

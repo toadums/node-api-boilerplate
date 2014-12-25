@@ -1,0 +1,5 @@
+{
+  "server": {
+    "db": "mongodb://localhost/dbdbdb"
+  }
+}
